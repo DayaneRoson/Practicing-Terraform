@@ -1,0 +1,9 @@
+Region: US East (N. Virginia) us-east-1
+Choose Amazon Machine Image (AMI) --- need to copy the ami-code
+Choose an Instance Type --- t2.micro
+VPC - choose the default for the course
+add storage
+add tags
+configure security group
+
+
