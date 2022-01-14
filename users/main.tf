@@ -5,6 +5,15 @@ terraform {
           version = "~>3.70"
       }
   }
+
+  backend "s3" {
+    bucket = "dev-applications-backend-state-dayvops"
+    #key = "07-backend-state-users-dev"
+    key = "dev/07-backend-state/users/backend-state"
+    region = "us-east-1"
+    dynamodb_table = "dev_application_locks"
+    encrypt = true
+  }
 }
 
 #Already configured the AWS credentials using environments variables
@@ -14,20 +23,6 @@ provider "aws" {
 }
 
 #Resources I want to alocate in the cloud
-resource "aws_s3_bucket" "leninha_bucket" {
-  bucket = "leninha-bucket-terraform"
-  versioning {
-    enabled = true
-  }
-}
-
-resource "aws_s3_bucket" "branquinha_bucket" {
-  bucket = "branquinha-bucket-terraform"
-  versioning {
-    enabled = true
-  }
-}
-
 resource "aws_iam_user" "my_first_iam_user" {
-  name = "my-first-iam-user-2"
+  name = "${terraform.workspace}_backend-state-user"
 }
